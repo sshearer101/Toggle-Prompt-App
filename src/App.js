@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const data = [
+  {question: "What is your return policy?",
+  answer: "dfnjdsnfjkd"},
+
+  {question: "How do I track my order?",
+  answer: "dfnjdsnfjkd"},
+
+  {question: "Can I purchase items again?",
+  answer: "dfnjdsnfjkd"}
+]
+const [selected, setSelected] = useState(null)
+
+const toggle = (i) => {
+  if(selected === i){
+    return setSelected(null)
+  }
+  setSelected(i)
 }
 
+return(
+  <div>
+    <div>
+    {data.map((item, i) => 
+      <div>
+        <div onClick={() => toggle(i)}>
+         <h1>{item.question}</h1>
+          <span>{selected === i ? '-' : '+'}</span>
+        </div>
+        <div className={selected === i ? "content-show" : "content-hide"}>
+          {item.answer}
+        </div>
+      </div>
+    )}
+    </div>
+  </div>
+)
+
+}
 export default App;
